@@ -87,7 +87,6 @@ export default {
   transition: all 0.5s;
 }
 .skeleton:hover {
-  filter: blur(1px);
   cursor:pointer;
   box-shadow:2px 2px 10px #333;
   transform: scale(0.9)
@@ -95,17 +94,22 @@ export default {
 .skeleton[state="-1"] {
   border: 7px solid #E6A23C;
   border-radius: 7px;
+  -webkit-filter: drop-shadow(8px 8px 5px #E6A23C);
+	filter: drop-shadow(0px 0px 7px #E6A23C);
 }
 .skeleton[state="0"] {
   border: 7px solid #F56C6C;
   border-radius: 7px;
+  -webkit-filter: drop-shadow(8px 8px 5px #F56C6C);
+	filter: drop-shadow(0px 0px 7px #F56C6C);
 }
 .skeleton[state="1"] {
   border: 7px solid #67C23A;
   border-radius: 7px;
+  -webkit-filter: drop-shadow(8px 8px 5px #67C23A);
+	filter: drop-shadow(0px 0px 7px #67C23A);
 }
 .skeleton[state="-2"]:hover {
-  filter: unset;
   transform: unset;
   animation: shakeX;
   animation-duration: 1s;
