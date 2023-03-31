@@ -1,11 +1,21 @@
 <template>
   <div id="infoTable">
     <h1>标题</h1>
-    <el-table :data="tableData" border style="width: 100%" :fit="true" class="table" max-height="650">
-      <el-table-column prop="terminal_id" label="终端编号terminal_id" min-width="75" header-align="center" align="center"> </el-table-column>
-      <el-table-column prop="time" label="时间time" min-width="200" header-align="center" align="center" :formatter="format_time"> </el-table-column>
-      <el-table-column prop="data" label="图像路径data" min-width="200" header-align="center" align="center"> </el-table-column>
-      <el-table-column prop="state" label="状态state" min-width="100" header-align="center" align="center">
+    <el-table :data="tableData" border style="width: 100%" :fit="true" class="table" max-height="650" :row-style="{height: '80px'}">
+      <el-table-column prop="terminal_id" label="终端编号terminal_id" min-width="10%" header-align="center" align="center"> </el-table-column>
+      <el-table-column prop="time" label="时间time" min-width="35%" header-align="center" align="center" :formatter="format_time"> </el-table-column>
+      <el-table-column prop="data" label="图像data" min-width="20%" header-align="center" align="center">
+        <template slot-scope="scope">
+            <el-image
+            lazy
+            :src="scope.row.data"
+            fit="fill"
+            :preview-src-list="[scope.row.data]"
+            style="padding: 0 30%;"
+            ></el-image>
+        </template>
+      </el-table-column>
+      <el-table-column prop="state" label="状态state" min-width="20%" header-align="center" align="center">
         <template slot-scope="scope">
             <el-tag :type="Boolean(scope.row.state) ? 'success' : 'danger'">{{Boolean(scope.row.state) ? "正常" : "异常"}}</el-tag>
         </template>
