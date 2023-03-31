@@ -124,7 +124,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #infoTable {
   display: flex;
   flex-direction: column;

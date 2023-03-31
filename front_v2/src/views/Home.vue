@@ -84,14 +84,11 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
   #Home {
     display: flex;
     flex-direction: column;
     justify-content: center;
-  }
-  h1 {
-    text-align: center;
   }
   .imgs_table {
     width: 100%;
@@ -99,6 +96,7 @@ export default {
     margin: auto;
     padding: 0 1vw;
     border-collapse: separate;
-    border-spacing: 1.5vw 5vw;
+    border-spacing: 4vw 5vw;
+    margin-top: -4vw;
   }
 </style>
