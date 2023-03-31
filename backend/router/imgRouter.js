@@ -7,8 +7,9 @@ const router = express.Router();
 
 function func(data) {
     return data.map(obj => {
-        const p = path.join(__dirname, `../dist`, obj.data)
-        if (!fs.existsSync(p)) {
+        const p = path.join(__dirname, `../dist`, obj.data || 'null')
+        console.log(obj.data)
+        if (!fs.existsSync(p) && obj.data !== './unconnected.jpg') {
             obj.data = './not found.jpg'
             obj.state = -1
         }

@@ -1,8 +1,22 @@
 const express = require('express');
 const db = require('../utils/db');
+const fs = require('fs');
+const path = require('path');
 
 
 const router = express.Router();
+
+function func(data) {
+    return data.map(obj => {
+        const p = path.join(__dirname, `../dist`, obj.data || 'null')
+        console.log(obj.data)
+        if (!fs.existsSync(p) && obj.data !== './unconnected.jpg') {
+            obj.data = './not found.jpg'
+            obj.state = -1
+        }
+        return obj
+    })
+}
 
 router.get('/getInfoTotal', function(req, res) {
     const { ID=null } = req.query;
@@ -44,6 +58,7 @@ router.get('/getInfoTable/:ID/:page/:page_size', function(req, res) {
                 msg: "get imgs data failed as server error"
             })
         } else if (data) {
+            func(data)
             res.status(200).send(data)
         } else {
             res.status(404).send({

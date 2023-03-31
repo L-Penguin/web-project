@@ -10,7 +10,7 @@
         <td v-for="(img, col) in imgs" :key="String(row)+'_'+String(col)">
           <ImgFrame
             :url="img?.data"
-            :state="img?.state.toString() || -2"
+            :state="img?.state?.toString() || -2"
             :label="img?.terminal_id"
           />
         </td>
