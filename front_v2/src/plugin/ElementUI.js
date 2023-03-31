@@ -4,6 +4,7 @@ import {
     Table,
     TableColumn,
     Tag,
+    Loading,
     Pagination,
     Skeleton,
     SkeletonItem,
@@ -14,6 +15,7 @@ Vue.use(Button)
 Vue.use(Table)
 Vue.use(TableColumn)
 Vue.use(Tag)
+Vue.use(Loading)
 Vue.use(Pagination)
 Vue.use(Skeleton)
 Vue.use(SkeletonItem)
