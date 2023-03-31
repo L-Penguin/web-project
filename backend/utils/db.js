@@ -64,7 +64,7 @@ exports.getImgData = function(num, callback) {
             data.map(obj => {
                 const str = JSON.stringify(obj.time);
                 const time = new Date(...str.FormatTime());
-                if (!time.CompareNow(10000)) {
+                if (!time.CompareNow(60*24*3)) {
                     obj.data = './unconnected.jpg'
                     obj.state = -1
                 }
