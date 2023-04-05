@@ -44,7 +44,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 // 解决history路由刷新报错问题
-app.use(history);
+app.use(history());
 
 // 设置后端静态资源访问路径
 app.use(express.static(path.join(__dirname, '/dist')));
