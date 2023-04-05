@@ -8,6 +8,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 // 导入cors解决跨域
 const cors = require('cors');
+// 导入前端资源路由history问题
+const history = require('connect-history-api-fallback');
 
 // package.json中配置项
 const config = require('./package').config;
@@ -40,6 +42,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
 	extended: false
 }));
+
+// 解决history路由刷新报错问题
+app.use(history);
 
 // 设置后端静态资源访问路径
 app.use(express.static(path.join(__dirname, '/dist')));
