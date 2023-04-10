@@ -17,21 +17,22 @@ const axios_diy = axios.create({
 
 // 接收拦截，用于统一处理响应，包括响应成功的页面提示和响应失败的错误提示
 axios_diy.interceptors.response.use(res=>{
-    // if (res.data.status) _this.$Message.success(res.data.msg);
+    if (res.data.status) {
+        _this.$message.success(res.data.msg);
+        return res.data.content;
+    }
     return res.data;
 }, err=> {
     // 当错误状态为Unauthorized，提示token过期，跳转首页
     if (err.response?.statusText === "Unauthorized") {
-        _this.$Message.error("token expired, please login again");
+        _this.$message.error("token expired, please login again");
         sessionStorage.clear(); 
         vm.$router.replace("/");
     } else {
         // 其余错误统一提示错误信息
-        _this.$Message.error(err.response.data.msg);
-        if (err.response.data) {
-            return err.response.data.err;
-        }
+        _this.$message.error(err.response.data.msg);
     }
+    return null
 })
 
 export default axios_diy;

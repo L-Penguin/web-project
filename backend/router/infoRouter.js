@@ -68,10 +68,30 @@ router.delete('/delInfoByGroupID/:group_id', function(req, res) {
                 msg: "delete info by group_id failed as server error"
             })
         } else if (data) {
-            res.status(200).send(data)
+            res.status(200).send({
+                content: data,
+                status: true,
+                msg: `delete group ${group_id} info successfully!` 
+            })
         } else {
             res.status(404).send({
                 msg: "delete info by group_id failed as request error"
+            })
+        }
+    })
+})
+
+router.get('/getGroupButton', function(req, res) {
+    db.getGroupButton(function(err, data) {
+        if (err) {
+            res.status(500).send({
+                msg: "get group data failed as server error"
+            })
+        } else if (data) {
+            res.status(200).send(data)
+        } else {
+            res.status(404).send({
+                msg: "get group data failed as request error"
             })
         }
     })
