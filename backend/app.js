@@ -22,6 +22,9 @@ const path = require('path')
 
 const app = express()
 
+// 图像静态资源路径
+const imgs_path = path.join(__dirname, `../${config.static_path}`)
+
 const port = (function() {
 	if (process.argv[2] === '--port' && process.argv[3] && /^\d+$/.test(process.argv[3])) {
 		return Number(process.argv[3])
@@ -48,6 +51,9 @@ app.use(history());
 
 // 设置后端静态资源访问路径
 app.use(express.static(path.join(__dirname, '/dist')));
+
+// 这里将数据库中的图像根目录设置为静态资源访问目录
+app.use(express.static(imgs_path))
 
 // 添加路由接口
 app.use('/imgRouter', imgRouter)
