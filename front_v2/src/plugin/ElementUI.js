@@ -9,7 +9,9 @@ import {
     Skeleton,
     SkeletonItem,
     Image,
-    Icon
+    Icon,
+    Message,
+    MessageBox
 } from 'element-ui'
 
 Vue.use(Button)
@@ -22,3 +24,6 @@ Vue.use(Skeleton)
 Vue.use(SkeletonItem)
 Vue.use(Image)
 Vue.use(Icon)
+
+Vue.prototype.$message = Message
+Vue.prototype.$msgbox = MessageBox
