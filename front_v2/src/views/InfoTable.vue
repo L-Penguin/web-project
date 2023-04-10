@@ -1,6 +1,7 @@
 <template>
   <div id="infoTable">
     <h1>标题</h1>
+    <el-button class="refresh-button" type="primary" icon="el-icon-refresh" @click="init_data">刷新数据</el-button>
     <el-table
       :data="tableData"
       border
@@ -38,9 +39,9 @@
         <template slot-scope="scope">
           <el-image
             lazy
-            :src="scope.row.data"
+            :src="scope.row.image_path"
             fit="fill"
-            :preview-src-list="[scope.row.data]"
+            :preview-src-list="[scope.row.image_path]"
             style="padding: 0 30%"
           ></el-image>
         </template>
@@ -88,10 +89,12 @@ export default {
         page_size: 10,
         total: 0,
       },
+      /*
       timer_1: null, // 定时器1：获取信息数量
       throttling_1: true, // 定时器1的节流开关
       timer_2: null, // 定时器2：获取信息
       throttling_2: true, // 定时器2的节流开关
+      */
       table_loading: true,
       page_loading: true,
     };
@@ -131,17 +134,23 @@ export default {
       const result = arr.join("").replace("T", " ");
       return result;
     },
+    init_data() {
+      this.table_loading = true
+      const { page, page_size } = this.pageData;
+      client.getInfoTable(this.ID, page, page_size, (data) => {
+        this.tableData = data;
+        this.table_loading = false
+      });
+      this.page_loading = true
+      client.getInfoTotal(this.ID, (count) => {
+        this.pageData.total = count;
+        this.page_loading = false
+      });
+    },
   },
   created() {
-    const { page, page_size } = this.pageData;
-    client.getInfoTable(this.ID, page, page_size, (data) => {
-      this.tableData = data;
-      this.table_loading = false
-    });
-    client.getInfoTotal(this.ID, (count) => {
-      this.pageData.total = count;
-      this.page_loading = false
-    });
+    // 初始化数据展示
+    this.init_data()
   },
   computed: {
     ID() {
@@ -149,6 +158,8 @@ export default {
     },
   },
   activated() {
+    this.init_data()
+    /*
     this.timer_1 = setInterval(() => {
       if (this.throttling_1) {
         this.throttling_1 = false;
@@ -173,14 +184,17 @@ export default {
       } else {
         console.warn(`getInfoTable 请求还未响应完成`);
       }
-    }, 1000);
+    }, 10000);
+    */
     console.log("InfoTable页面激活");
   },
   deactivated() {
+    /*
     clearInterval(this.timer_1);
     clearInterval(this.timer_2);
     this.throttling_1 = true;
     this.throttling_2 = true;
+    */
     this.tableData = [];
     this.table_loading = true;
     this.page_loading = true;
@@ -196,5 +210,10 @@ export default {
   flex-direction: column;
   align-content: center;
   margin: 0 10%;
+}
+.refresh-button {
+  min-width: 125px;
+  width: 7%;
+  margin-bottom: 10px;
 }
 </style>
