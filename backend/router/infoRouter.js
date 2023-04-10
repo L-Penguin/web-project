@@ -1,21 +1,8 @@
 const express = require('express');
 const db = require('../utils/db');
-const fs = require('fs');
-const path = require('path');
-
 
 const router = express.Router();
 
-function func(data) {
-    return data.map(obj => {
-        const p = path.join(__dirname, `../dist`, obj.data || 'null')
-        if (!fs.existsSync(p) && obj.data !== './unconnected.jpg') {
-            obj.data = './not found.jpg'
-            obj.state = -1
-        }
-        return obj
-    })
-}
 
 router.get('/getInfoTotal', function(req, res) {
     const { ID=null } = req.query;
@@ -57,11 +44,34 @@ router.get('/getInfoTable/:ID/:page/:page_size', function(req, res) {
                 msg: "get imgs data failed as server error"
             })
         } else if (data) {
-            func(data)
             res.status(200).send(data)
         } else {
             res.status(404).send({
                 msg: "get imgs data failed as request error"
+            })
+        }
+    })
+})
+
+router.delete('/delInfoByGroupID/:group_id', function(req, res) {
+    const {group_id=null} = req.params;
+    if (!group_id) {
+        console.log(`delInfoByGroupID error: wrong group_id: ${group_id}`)
+        res.status(404).send({
+            msg: "delete info by group_id failed as wrong group_id"
+        })
+        return;
+    }
+    db.delInfoByGroupID(group_id, function(err, data) {
+        if (err) {
+            res.status(500).send({
+                msg: "delete info by group_id failed as server error"
+            })
+        } else if (data) {
+            res.status(200).send(data)
+        } else {
+            res.status(404).send({
+                msg: "delete info by group_id failed as request error"
             })
         }
     })
