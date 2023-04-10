@@ -8,7 +8,8 @@ import {
     Pagination,
     Skeleton,
     SkeletonItem,
-    Image
+    Image,
+    Icon
 } from 'element-ui'
 
 Vue.use(Button)
@@ -20,3 +21,4 @@ Vue.use(Pagination)
 Vue.use(Skeleton)
 Vue.use(SkeletonItem)
 Vue.use(Image)
+Vue.use(Icon)
