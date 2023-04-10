@@ -1,7 +1,7 @@
 <template>
   <div id="infoTable">
     <h1>标题</h1>
-    <el-button class="refresh-button" type="primary" icon="el-icon-refresh" @click="init_data">刷新数据</el-button>
+    
     <el-table
       :data="tableData"
       border
@@ -73,6 +73,7 @@
       v-loading="page_loading"
     >
     </el-pagination>
+    <el-button class="refresh-button" type="primary" icon="el-icon-refresh" @click="init_data">刷新数据</el-button>
   </div>
 </template>
 
@@ -210,10 +211,13 @@ export default {
   flex-direction: column;
   align-content: center;
   margin: 0 10%;
+  position: relative;
 }
 .refresh-button {
   min-width: 125px;
   width: 7%;
-  margin-bottom: 10px;
+  position: absolute;
+  bottom: 0;
+  right: 20px;
 }
 </style>
