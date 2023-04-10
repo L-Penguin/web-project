@@ -116,9 +116,19 @@ exports.getImgData = function(num, callback) {
 // 根据group_id分类删除check_info表中数据
 exports.delInfoByGroupID = function(group_id, callback) {
     const sql = `DELETE FROM ${info_table} WHERE group_id = '${group_id}';`
-    console.log(`sql: ${sql}`)
+    console.log(`sql: ${sql}`);
     database.query(sql, (err, data=null) => {
         if (err) console.log(`error: ${err}`);
         callback(err, data);
     }) 
+}
+
+// 查询当前check_info的group_id
+exports.getGroupButton = function(callback) {
+    const sql = `SELECT DISTINCT(group_id) from ${info_table};`
+    console.log(`sql: ${sql}`);
+    database.query(sql, (err, data=null) => {
+        if (err) console.log(`error: ${err}`);
+        callback(err, data);
+    })
 }
