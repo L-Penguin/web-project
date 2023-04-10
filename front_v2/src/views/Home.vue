@@ -1,6 +1,7 @@
 <template>
   <div id="Home">
     <h1>标题区域</h1>
+    <el-button class="jump-button" type="primary" @click="jumpInfoControl">跳转</el-button>
     <table
       :cols="cols"
       cellpadding="10%"
@@ -9,7 +10,7 @@
       <tr v-for="(imgs, row) in imgsArr" :key="row">
         <td v-for="(img, col) in imgs" :key="String(row)+'_'+String(col)">
           <ImgFrame
-            :url="img?.data"
+            :url="img?.image_path"
             :state="img?.state?.toString() || -2"
             :label="img?.terminal_id"
           />
@@ -40,8 +41,10 @@ export default {
   methods: {
 
   },
-  mounted() {
-
+  methods: {
+    jumpInfoControl() {
+      this.$router.push('/InfoControl')
+    }
   },
   computed: {
     // 根据行和列将图片分行列
@@ -66,6 +69,7 @@ export default {
     this.timer_1 = setInterval(() => {
       if (this.throttling_1) {
         this.throttling_1 = false;
+        // this.cols * this.rows表示获取多少终端并以多少行和列展示
         client.getImgsData(this.cols * this.rows, (data) => {
           this.imgsData = data;
           this.throttling_1 = true;
@@ -89,6 +93,7 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 0 100px;
   }
   .imgs_table {
     width: 100%;
@@ -98,5 +103,11 @@ export default {
     border-collapse: separate;
     border-spacing: 4vw 5vw;
     margin-top: -4vw;
+  }
+  .jump-button {
+    width: 5%;
+    position: fixed;
+    top: 50px;
+    right: 50px;
   }
 </style>
