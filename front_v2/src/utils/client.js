@@ -20,4 +20,10 @@ client.getInfoTable = function(ID, page, page_size, callback) {
     })
 }
 
+client.delInfoByGroupID = function(group_id, callback) {
+    axios_diy.delete(`infoRouter/delInfoByGroupID/${group_id}`).then(res => {
+        callback(res)
+    })
+}
+
 export default client
