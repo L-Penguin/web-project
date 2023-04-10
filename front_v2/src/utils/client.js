@@ -21,8 +21,13 @@ client.getInfoTable = function(ID, page, page_size, callback) {
 }
 
 client.delInfoByGroupID = function(group_id, callback) {
-    axios_diy.delete(`infoRouter/delInfoByGroupID/${group_id}`).then(res => {
-        if (res) callback(res)
+    return axios_diy.delete(`infoRouter/delInfoByGroupID/${group_id}`).then(res => {
+        if (res) {
+            callback(res)
+        } else {
+            return Promise.reject(null)
+        }
+
     })
 }
 
