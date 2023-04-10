@@ -9,12 +9,14 @@
 <script>
 import Home from './views/Home'
 import InfoTable from './views/InfoTable';
+import InfoControl from './views/InfoControl';
 
 export default {
   name: 'App',
   components: {
     Home,
     InfoTable,
+    InfoControl,
   },
 }
 </script>

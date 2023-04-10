@@ -22,7 +22,15 @@ const routes = [
 		name: 'infoTable',
 		component: resolveView('InfoTable'),
 		meta: {
-			title: '信息页',
+			title: '信息展示页',
+		}
+	},
+	{
+		path: '/InfoControl',
+		name: 'infoControl',
+		component: resolveView('InfoControl'),
+		meta: {
+			title: '信息操作页',
 		}
 	}
 ]
